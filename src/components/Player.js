@@ -7,15 +7,10 @@ const Player = ({ currentSong, isPlaying, setIsPlaying}) =>{
     //Ref
     const audioRef = useRef(null);
 
-
     //Event Handlers
     const playSongHandler = () =>{
-        if(isPlaying){
-            audioRef.current.pause();
-        }
-        else{
-            audioRef.current.play();
-        }
+        if(isPlaying){audioRef.current.pause();}
+        else{audioRef.current.play();}
         setIsPlaying(!isPlaying); 
     }
     const timeUpdateHandler = (e) => {
@@ -24,9 +19,7 @@ const Player = ({ currentSong, isPlaying, setIsPlaying}) =>{
         setSongInfo({...songInfo,currentTime:current,duration})
     }
     const getTime = (time) =>{
-        return(
-            Math.floor(time/60) + ":" + ("0" + Math.floor(time%60)).slice(-2)
-        )
+        return(Math.floor(time/60) + ":" + ("0" + Math.floor(time%60)).slice(-2))
     }
     const dragHandler = (e) => {
         audioRef.current.currentTime = e.target.value;
@@ -38,7 +31,6 @@ const Player = ({ currentSong, isPlaying, setIsPlaying}) =>{
         currentTime: 0,
         duration: 0,
     });
-
 
     return(
         <div className="player">
@@ -55,7 +47,6 @@ const Player = ({ currentSong, isPlaying, setIsPlaying}) =>{
             <audio onTimeUpdate={timeUpdateHandler} ref={audioRef} src={currentSong.audio} onLoadedMetadata={timeUpdateHandler}></audio>
         </div>
     )
-
 }
 
 export default Player;
